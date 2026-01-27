@@ -1,19 +1,21 @@
 import express, { Router } from "express"
-
+import { signup, login, logout, updateProfile } from "../controllers/authController.js";
+import {verifyAuth} from "../middlewares/authMiddleware.js"
 
 const router = express.Router();
 
+//get
+router.get("/checkUserAuth", verifyAuth , (req,res) => res.status(200).json(req.user))
 
-router.get("/signup",(req,res) => {
-    res.send("signup is working fine");
-})
+//post
+router.post("/signup",signup);
+router.post("/login",login)
+router.post("/logout",logout)
 
-router.get("/login",(req,res) => {
-    res.send("login is working fine");
-})
+//put
+router.put("/updateProfile", verifyAuth ,updateProfile)
 
-router.get("/logout",(req,res) => {
-    res.send("logout is working fine");
-})
+
+
 
 export default router;
