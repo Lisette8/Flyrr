@@ -10,7 +10,8 @@ const icons = {
     arrowRight: "M5 12h14 M12 5l7 7-7 7",
     check: "M20 6 9 17l-5-5",
     menu: "M4 12h16 M4 6h16 M4 18h16",
-    x: "M18 6 6 18 M6 6l12 12"
+    x: "M18 6 6 18 M6 6l12 12",
+    bell: "M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"
 };
 
 const Icon = ({ name, size = 24, className = '', strokeWidth = 2 }) => {

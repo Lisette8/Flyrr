@@ -20,7 +20,7 @@ const verifyAuth = async (req, res, next) => {
 
     //if users exists by id
     const verifiedUser = await User.findById(decoded.userId).select("-password");
-    if(!verified){
+    if(!verifiedUser){
         return res.status(404).json({message: "User not found"});
     }
 

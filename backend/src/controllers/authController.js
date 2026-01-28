@@ -96,7 +96,7 @@ const login = async (req, res) => {
   
       res.status(200).json({
         _id: user._id,
-        fullName: user.fullName,
+        username: user.username,
         email: user.email,
         profilePic: user.profilePic,
       });
@@ -126,7 +126,16 @@ const updateProfile = async (req, res) =>{
 
         const userId = req.user._id;
         //user presence and auth already verified in the middleware
-        const uploadImage =  await cloudi.uploader.upload(profilePicture)
+        let uploadImage;
+        try {
+            uploadImage = await cloudi.uploader.upload(profilePicture, {
+                folder: "flyrr_profiles",
+                resource_type: "auto",
+            });
+        } catch (uploadError) {
+            console.error("Cloudinary upload error:", uploadError);
+            return res.status(400).json({ message: "Failed to upload profile picture" });
+        }
         const updatedUserInstance = await User.findByIdAndUpdate(userId, {profilePic: uploadImage.secure_url}, {new: true})
 
         res.status(200).json({

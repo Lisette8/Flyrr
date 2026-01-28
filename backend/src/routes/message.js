@@ -7,7 +7,9 @@ import { getContacts, getPartners, getMessageByUserId, sendMessage} from "../con
 const router = express.Router();
 
 //we verif again, this is in order (that means arcjet first then auth)
-router.use(ArcjetVerif, verifyAuth);
+// Temporarily disabled Arcjet for development
+// router.use(ArcjetVerif);
+router.use(verifyAuth);
 
 
 router.get("/contacts", getContacts);
