@@ -33,11 +33,22 @@ const PORT = process.env.PORT || 3000;
 // Initialize Socket.IO
 initializeSocket(io);
 
+
 // CORS configuration
+let currentRoad;
+if(process.env.NODE_ENV === "production"){
+    currentRoad = "https://flyrr.onrender.com";
+}
+else{
+    currentRoad = "http://localhost:5173";
+}
 app.use(cors({
-    origin: process.env.NODE_ENV === "production" ? false : "http://localhost:5173",
+    
+    origin: currentRoad,
     credentials: true
 }));
+
+
 
 app.use(express.json({ limit: '10mb' }))
 app.use(cookieParser())
