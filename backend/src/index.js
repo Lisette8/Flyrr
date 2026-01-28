@@ -18,16 +18,17 @@ dotenv.config();
 
 const app = express();
 const httpServer = createServer(app);
+
 const io = new Server(httpServer, {
     cors: {
-        origin: process.env.NODE_ENV === "production" ? false : ["http://localhost:5173"],
+        origin: process.env.NODE_ENV === "production" ? true : ["http://localhost:5173"],
         credentials: true
     }
 });
 
 const __dirname = path.resolve();
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 // Initialize Socket.IO
 initializeSocket(io);
@@ -47,14 +48,15 @@ app.use("/api/users", userRoutes);
 app.use("/api/notifications", notificationRoutes);
 
 //hedheya el static backend 7atineh fel dossier mta3 el dist eli hwa fel production phase yodhher ba3d el deployment...
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, "../frontend/dist")));
+//if (process.env.NODE_ENV === "production") {
+//    app.use(express.static(path.join(__dirname, "../frontend/dist")));
+//
+//    app.get(/.*/, (_, res) => { //if i don't want to use the req (request) i put "_" instead
+//        res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+//    })
+//
+//}
 
-    app.get(/.*/, (_, res) => { //if i don't want to use the req (request) i put "_" instead
-        res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
-    })
-
-}
 
 
 httpServer.listen(PORT, () => {
