@@ -4,6 +4,7 @@ import { generateToken } from "../lib/utils.js";
 import { sendWelcomeEmail } from "../email/emailHandler.js";
 import cloudi from "../lib/cloudinary.js";
 
+
 const signup = async (req,res) => {
     const {username, email, password} = req.body
 
