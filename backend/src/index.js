@@ -27,7 +27,7 @@ const io = new Server(httpServer, {
 
 const __dirname = path.resolve();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 // Initialize Socket.IO
 initializeSocket(io);
