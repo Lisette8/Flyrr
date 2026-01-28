@@ -21,8 +21,10 @@ const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
     cors: {
-        origin: process.env.NODE_ENV === "production" ? true : ["http://localhost:5173"],
-        credentials: true
+        origin: [
+            "http://localhost:5173",
+            "https://flyrr-1.onrender.com"
+          ],
     }
 });
 
@@ -35,18 +37,13 @@ initializeSocket(io);
 
 
 // CORS configuration
-let currentRoad;
-if(process.env.NODE_ENV === "production"){
-    currentRoad = "https://flyrr.onrender.com";
-}
-else{
-    currentRoad = "http://localhost:5173";
-}
 app.use(cors({
-    
-    origin: currentRoad,
+    origin: [
+      "http://localhost:5173",
+      "https://flyrr-1.onrender.com"
+    ],
     credentials: true
-}));
+  }));
 
 
 
